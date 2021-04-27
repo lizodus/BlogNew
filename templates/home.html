@@ -1,11 +1,12 @@
-<!-- templates/home.html -->
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %} {% for post in object_list %}
+<div class="post-entry" style="margin-top: 50px;">
+  <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+  <p>{{ post.body }}</p>
+</div>
+<div>
+  {% for comment in post.comments.all %}
 
-{% block content %}
-    {% for post in object_list %}
-         <div class="post-entry">
-            <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title}}</a></h2>
-            <p>{{ post.body }}</p>
-        </div>
-    {% endfor %}
-{% endblock content %}
+  <p><span style="font-weight: bold;">{{comment.author}}</span> : {{comment}}</p>
+  {%endfor%}
+</div>
+{% endfor %} {% endblock content %}

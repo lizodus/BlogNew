@@ -1,27 +1,37 @@
-<!-- templates/base.html-->
 {% load static %}
-<html>
-    <head>
-        <title>Django blog</title>
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-        <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <div>
-            <header>
-                <div class="nav-left">
-                    <h1><a href="{% url 'home' %}">Django blog</a></h1>
-                </div>
-            </header>  
-            {% if user.is_authenticated %}
-                <p>Hi {{ user.username }}!</p>
-                <p><a href="{% url 'logout' %}">Log out</a></p>
-            {% else %}
-                <p>You are not logged in.</p>
-                <a href="{% url 'login' %}">Log In</a>
-            {% endif %}
-        {% block content %}
-        {% endblock content %}
-        </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>Lizodus Blog</title>
+  </head>
+  <body>
+    <header>
+      <div class="nav-left">
+        <h1><a href="{% url 'home' %}">Lizodus Blog</a></h1>
+      </div>
+      <div class="nav-right">
+        <a href="{% url 'post_new' %}">+ Create New Post</a>
+      </div>
+    </header>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}!</p>
+    <p><a href="{% url 'logout' %}">Log out</a></p>
+    {% else %}
+    <p>
+      You are not logged in. Click 
+      <a href="{% url 'signup' %}">here</a> 
+      to create an account and make a blog post.
+    </p>
+    <a href="{% url 'login' %}">Or Log In</a>
+    {% endif %} {% block content %} {% endblock content %}
+  </body>
 </html>
